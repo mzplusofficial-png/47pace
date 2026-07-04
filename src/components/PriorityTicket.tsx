@@ -10,10 +10,18 @@ interface PriorityTicketProps {
 export default function PriorityTicket({ state }: PriorityTicketProps) {
   const [copied, setCopied] = useState(false);
 
+  const [shared, setShared] = useState(false);
+
   const handleCopy = () => {
     navigator.clipboard.writeText(state.ticketNumber);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(state.referralCode);
+    setShared(true);
+    setTimeout(() => setShared(false), 3000);
   };
 
   return (
@@ -177,11 +185,11 @@ export default function PriorityTicket({ state }: PriorityTicketProps) {
           </button>
           
           <button 
-            onClick={() => alert("Lien de partage VIP copié dans le presse-papier ! Partagez pour grimper de 5 places dans la file.")}
+            onClick={handleShare}
             className="flex items-center gap-1.5 px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 hover:bg-cyan-500/20 text-xs font-semibold text-cyan-400 rounded-xl transition duration-200 cursor-pointer"
           >
             <Share2 className="w-3.5 h-3.5" />
-            Partager mon lien VIP
+            {shared ? "Lien VIP copié !" : "Partager mon lien VIP"}
           </button>
         </div>
       </div>

@@ -16,14 +16,14 @@ export default function App() {
 
   // Check localStorage on mount
   useEffect(() => {
-    const savedState = localStorage.getItem('mz_priority_access');
-    if (savedState) {
-      try {
+    try {
+      const savedState = localStorage.getItem('mz_priority_access');
+      if (savedState) {
         const parsed = JSON.parse(savedState) as QueueState;
         setQueueState(parsed);
-      } catch (e) {
-        console.error('Error loading priority state', e);
       }
+    } catch (e) {
+      console.warn('Unable to access localStorage on load:', e);
     }
   }, []);
 
@@ -64,7 +64,11 @@ export default function App() {
         referralCode: `https://mzplus.app/vip/${uniqueCode.toLowerCase()}`
       };
 
-      localStorage.setItem('mz_priority_access', JSON.stringify(newState));
+      try {
+        localStorage.setItem('mz_priority_access', JSON.stringify(newState));
+      } catch (e) {
+        console.warn('Unable to save to localStorage:', e);
+      }
       setQueueState(newState);
 
       setIsSubmitting(false);
