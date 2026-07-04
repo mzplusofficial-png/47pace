@@ -1,0 +1,6 @@
+{
+  "name": "MZ+ - Affluence Exceptionnelle",
+  "description": "Page plein écran haut de gamme signalant une forte affluence sur la plateforme MZ+ avec système de réservation de places restantes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
